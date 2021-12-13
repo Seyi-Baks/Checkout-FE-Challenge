@@ -2,12 +2,18 @@ import styled from "styled-components";
 import FieldFeedback from "./FieldFeedback";
 
 const TextAreaWrapper = styled.textarea`
-  ${(props) => {
-    const {
-      theme: { input, defaultFontFamily },
-    } = props;
-    return `${input};${defaultFontFamily};`;
-  }};
+  font-size: 12px;
+  padding: 20px;
+  background: white;
+  border: none;
+  margin: 10px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 3px;
+  width: 100%;
+  display: block;
+  ::placeholder {
+    color: black;
+  }
 `;
 
 const TextArea = (props) => {
@@ -46,3 +52,5 @@ const TextArea = (props) => {
     </>
   );
 };
+
+export default TextArea;

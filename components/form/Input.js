@@ -2,7 +2,17 @@ const { default: styled } = require("styled-components");
 const { default: FieldFeedback } = require("./FieldFeedback");
 
 const InputWrapper = styled.input`
-  ${(props) => props.theme.input}
+  font-size: 12px;
+  padding: 20px;
+  margin-bottom: 10px;
+  background: white;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  display: block;
+  ::placeholder {
+    color: black;
+  }
 `;
 
 const Input = (props) => {
@@ -46,3 +56,5 @@ const Input = (props) => {
     </>
   );
 };
+
+export default Input;
