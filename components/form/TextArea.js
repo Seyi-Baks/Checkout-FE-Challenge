@@ -1,22 +1,25 @@
-const { default: styled } = require("styled-components");
-const { default: FieldFeedback } = require("./FieldFeedback");
+import styled from "styled-components";
+import FieldFeedback from "./FieldFeedback";
 
-const InputWrapper = styled.input`
-  ${(props) => props.theme.input}
+const TextAreaWrapper = styled.textarea`
+  ${(props) => {
+    const {
+      theme: { input, defaultFontFamily },
+    } = props;
+    return `${input};${defaultFontFamily};`;
+  }};
 `;
 
-const Input = (props) => {
+const TextArea = (props) => {
   const {
-    placeholder,
     name,
     id,
     disabled,
     handleChange,
-    handleBlur,
     value,
-    type,
-    min,
-    readOnly,
+    rows,
+    cols,
+    placeholder,
     description,
     error,
   } = props;
@@ -25,18 +28,15 @@ const Input = (props) => {
 
   return (
     <>
-      <InputWrapper
+      <TextAreaWrapper
         placeholder={placeholder}
         id={id}
-        readOnly={readOnly}
         name={name}
         disabled={disabled}
         value={value}
-        min={min}
-        type={type || "text"}
         onChange={handleChange}
-        onBlur={handleBlur}
-        aria-describedby={descriptionId}
+        rows={rows || 4}
+        cols={cols}
       />
       <FieldFeedback
         descriptionId={descriptionId}
