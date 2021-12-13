@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import styled from "styled-components";
 import Input from "../components/form/Input";
 import Comment from "../components/feed/Comment";
@@ -13,6 +13,7 @@ const Container = styled.div`
   padding: 20px 20px;
   background-color: #f5f5f5;
   margin: 25px auto;
+  border-radius: 5px;
 `;
 
 const Header = styled.h1`
@@ -45,70 +46,81 @@ export const Col = styled.div`
   ${(props) => props.collapse && media[props.collapse](`display: none`)}
 `;
 
-const CustomerFeedback = () => {
-  const [rating, setRating] = useState(0); // initial rating value
-  const { register, handleSubmit, errors, reset, handleChange, handleBlur } =
-    useForm();
+const initialState = {
+  customerName: "",
+  customerEmail: "",
+  customerComment: "",
+};
 
-  const ratingChanged = (newRating) => {
-    setRating(newRating);
+const CustomerFeedback = () => {
+  const [state, setState] = useState(initialState);
+  const [rating, setRating] = useState(0);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(rating);
+  };
+
+  const handleChange = (e) => {
+    const input = e.currentTarget.name;
+    const value = e.currentTarget.value;
+
+    setState((prev) => ({ ...prev, [input]: value }));
   };
 
   return (
     <div>
       <Container>
         <Grid>
-          <Row>
-            <Col size={2}>
-              <Row>
-                <Input
-                  required
-                  placeholder={"Name"}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  value={""}
-                  id="customerName"
-                  type="text"
-                  name={"customerName"}
-                />
-              </Row>
-              <Row>
-                <Input
-                  required
-                  placeholder={"Email"}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  value={""}
-                  id="customerEmail"
-                  type="text"
-                  name={"customerEmail"}
-                />
-              </Row>
-              <Row>
-                <p>Product rating: </p>
-                <ReactStars
-                  count={5}
-                  onChange={ratingChanged}
-                  size={40}
-                  activeColor="#ffd700"
-                />
-              </Row>
-              <Row>
-                <TextArea
-                  required
-                  placeholder={"Comment"}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  value={""}
-                  id="customerComment"
-                  rows={10}
-                  name={"customerComment"}
-                />
-              </Row>
-              <Button primary>Submit </Button>
-            </Col>
-            <Col size={2}></Col>
-          </Row>
+          <form onSubmit={handleSubmit}>
+            <Row>
+              <Col size={2}>
+                <Row>
+                  <Input
+                    placeholder={"Name"}
+                    handleChange={handleChange}
+                    id="customerName"
+                    type="text"
+                    name="customerName"
+                    value={state.customerName}
+                  />
+                </Row>
+                <Row>
+                  <Input
+                    placeholder="Email"
+                    handleChange={handleChange}
+                    id="customerEmail"
+                    type="text"
+                    name="customerEmail"
+                    value={state.customerEmail}
+                  />
+                </Row>
+                <Row>
+                  <p>Product rating: </p>
+                  <ReactStars
+                    count={5}
+                    onChange={setRating}
+                    size={40}
+                    activeColor="#ffd700"
+                  />
+                </Row>
+                <Row>
+                  <TextArea
+                    placeholder="Comment"
+                    handleChange={handleChange}
+                    id="customerComment"
+                    rows={10}
+                    name="customerComment"
+                    value={state.customerComment}
+                  />
+                </Row>
+                <Button primary type="submit">
+                  Submit{" "}
+                </Button>
+              </Col>
+              <Col size={2}></Col>
+            </Row>
+          </form>
           <Container>
             <Comment />
             <Comment />

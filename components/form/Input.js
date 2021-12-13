@@ -1,5 +1,4 @@
-const { default: styled } = require("styled-components");
-const { default: FieldFeedback } = require("./FieldFeedback");
+import styled from "styled-components";
 
 const InputWrapper = styled.input`
   font-size: 12px;
@@ -22,13 +21,10 @@ const Input = (props) => {
     id,
     disabled,
     handleChange,
-    handleBlur,
-    value,
     type,
     min,
     readOnly,
-    description,
-    error,
+    value,
   } = props;
 
   const descriptionId = `${id}_description`;
@@ -41,17 +37,11 @@ const Input = (props) => {
         readOnly={readOnly}
         name={name}
         disabled={disabled}
-        value={value}
         min={min}
         type={type || "text"}
         onChange={handleChange}
-        onBlur={handleBlur}
         aria-describedby={descriptionId}
-      />
-      <FieldFeedback
-        descriptionId={descriptionId}
-        error={error}
-        description={description}
+        value={value}
       />
     </>
   );

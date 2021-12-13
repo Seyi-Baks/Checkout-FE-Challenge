@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const FieldError = styled.div`
   color: red;
@@ -61,8 +61,7 @@ const NotificationMessage = styled.div`
         margin-top: 0;
         margin-bottom: 0;
       }
-      ${marginCSS};
-      ${notificationStyles[type] || ``}
+}
     `;
   }}
 `;

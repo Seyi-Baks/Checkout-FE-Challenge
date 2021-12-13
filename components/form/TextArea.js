@@ -1,5 +1,5 @@
+import React from "react";
 import styled from "styled-components";
-import FieldFeedback from "./FieldFeedback";
 
 const TextAreaWrapper = styled.textarea`
   font-size: 12px;
@@ -16,19 +16,9 @@ const TextAreaWrapper = styled.textarea`
   }
 `;
 
-const TextArea = (props) => {
-  const {
-    name,
-    id,
-    disabled,
-    handleChange,
-    value,
-    rows,
-    cols,
-    placeholder,
-    description,
-    error,
-  } = props;
+const TextArea = React.forwardRef((props, ref) => {
+  const { name, id, disabled, handleChange, rows, cols, placeholder, value } =
+    props;
 
   const descriptionId = `${id}_description`;
 
@@ -38,19 +28,16 @@ const TextArea = (props) => {
         placeholder={placeholder}
         id={id}
         name={name}
-        disabled={disabled}
         value={value}
+        disabled={disabled}
         onChange={handleChange}
         rows={rows || 4}
         cols={cols}
       />
-      <FieldFeedback
-        descriptionId={descriptionId}
-        error={error}
-        description={description}
-      />
     </>
   );
-};
+});
+
+TextArea.displayName = "TextArea";
 
 export default TextArea;
