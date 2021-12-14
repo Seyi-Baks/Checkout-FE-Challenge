@@ -1,18 +1,5 @@
 import styled from "styled-components";
-
-const InputWrapper = styled.input`
-  font-size: 12px;
-  padding: 20px;
-  margin-bottom: 10px;
-  background: white;
-  border: none;
-  border-radius: 3px;
-  width: 100%;
-  display: block;
-  ::placeholder {
-    color: black;
-  }
-`;
+import { InputWrapper } from "../../styles/Styles";
 
 const Input = (props) => {
   const {
