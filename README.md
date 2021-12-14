@@ -16,7 +16,7 @@ The purpose of this is app is to build a simple customer feedback page.
 1. Start the dev build
 
 ```shell
-yarn dev
+npm run dev
 ```
 
 ## What's missing?
